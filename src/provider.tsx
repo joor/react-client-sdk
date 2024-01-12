@@ -62,7 +62,9 @@ class LDProvider extends Component<PropsWithChildren<ProviderConfig>, LDHocState
     const { flags: targetFlags } = this.props;
     ldClient.on('change', (changes: LDFlagChangeset) => {
       const reactOptions = this.getReactOptions();
-      const updates = getFlattenedFlagsFromChangeset(changes, targetFlags);
+      // Add this.state.unproxiedFlags as a new attribute for getFlattenedFlagsFromChangeset so
+      // the method now can validate if the FF changed or remained the same
+      const updates = getFlattenedFlagsFromChangeset(changes, targetFlags, this.state.unproxiedFlags);
       const unproxiedFlags = {
         ...this.state.unproxiedFlags,
         ...updates,
