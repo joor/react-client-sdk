@@ -1,6 +1,6 @@
 {
   "name": "@joor/launchdarkly-react-client-sdk",
-  "version": "3.0.10-1",
+  "version": "3.0.10-2",
   "description": "Joor's fork of LaunchDarkly SDK for React",
   "author": "LaunchDarkly <team@launchdarkly.com>",
   "license": "Apache-2.0",
