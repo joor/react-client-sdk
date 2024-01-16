@@ -12,4 +12,3 @@ test-types.js
 docs/build/
 yarn.lock
 package-lock.json
-.npmrc

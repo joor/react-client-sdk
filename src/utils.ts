@@ -33,16 +33,22 @@ export const camelCaseKeys = (rawFlags: LDFlagSet) => {
  * @param changes the `LDFlagChangeset` from the ldClient onchange handler.
  * @param targetFlags if targetFlags are specified, changes to other flags are ignored and not returned in the
  * flattened `LDFlagSet`
+ * @param currentFlags if currentFlags are specified, changes to those specific flags will be taken into account,
+ * the rest will be ignored
  * @return an `LDFlagSet` with the current flag values from the LDFlagChangeset filtered by `targetFlags`. The returned
  * object may be empty `{}` if none of the targetFlags were changed.
  */
 export const getFlattenedFlagsFromChangeset = (
   changes: LDFlagChangeset,
   targetFlags: LDFlagSet | undefined,
+  currentFlags?: LDFlagSet | undefined,
 ): LDFlagSet => {
   const flattened: LDFlagSet = {};
   for (const key in changes) {
-    if (!targetFlags || targetFlags[key] !== undefined) {
+    if (
+      (!targetFlags || targetFlags[key] !== undefined) &&
+      (!currentFlags || currentFlags[key] !== changes[key].current)
+    ) {
       flattened[key] = changes[key].current;
     }
   }
